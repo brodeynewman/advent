@@ -46,7 +46,6 @@ func main() {
 
 	bytes := strings.Split(string(content), "\n")
 
-	// var curr int64 = 0
 	var h int64 = 0
 	var d int64 = 0
 

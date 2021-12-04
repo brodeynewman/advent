@@ -34,15 +34,7 @@ func multiply(g []string, e []string) int64 {
 	return xi * yi
 }
 
-func main() {
-	content, err := ioutil.ReadFile("input.txt")
-	
-	if err != nil {
-		log.Fatal(err)
-	}
-
-	t := strings.TrimSpace(string(content))
-	bytes := strings.Split(t, "\n")
+func calcPowerConsumption(bytes []string) int64 {
 	colLen := len(bytes[0])
 
 	gamma := []string{}
@@ -68,7 +60,20 @@ func main() {
 	}
 
 	// multiply gamma & episol binary number value
-	n := multiply(gamma, epsilon)
+	return multiply(gamma, epsilon)
+}
 
-	fmt.Println(n)
+func main() {
+	content, err := ioutil.ReadFile("input.txt")
+	
+	if err != nil {
+		log.Fatal(err)
+	}
+
+	t := strings.TrimSpace(string(content))
+	bytes := strings.Split(t, "\n")
+
+	var pc int64 = calcPowerConsumption(bytes)
+
+	fmt.Println(pc)
 }

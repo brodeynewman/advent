@@ -1,3 +1,6 @@
+
+
+
 package main
 
 import (
@@ -17,6 +20,45 @@ func parseInt64(s string) int64 {
 	return x
 }
 
+func getDiagonalPoints(x1 string, y1 string, x2 string, y2 string) []string {
+	var plist []string
+
+	var xi int64 = parseInt64(x1)
+	var yi int64 = parseInt64(y1)
+
+	var xMove int64
+	var yMove int64
+
+	if parseInt64(x1) < parseInt64(x2) {
+		xMove = 1
+	} else {
+		xMove = -1
+	}
+
+	if parseInt64(y1) < parseInt64(y2) {
+		yMove = 1
+	} else {
+		yMove = -1
+	}
+
+	var x int64 = xi;
+	var y int64 = yi;
+
+	for true {
+		var point string = strconv.FormatInt(x, 10) + "," + strconv.FormatInt(y, 10)
+		plist = append(plist, point)
+
+		if x == parseInt64(x2) {
+			break
+		}
+
+		x += xMove
+		y += yMove
+	}
+
+	return plist
+}
+
 func buildPoints(p [][][]string) []string {
 	var points []string
 
@@ -31,8 +73,6 @@ func buildPoints(p [][][]string) []string {
 		if (x1 == x2) {	
 			py1 := parseInt64(y1)
 			py2 := parseInt64(y2)
-
-			fmt.Println("NICEE", py1, py2)
 
 			var plist []string
 			
@@ -79,9 +119,13 @@ func buildPoints(p [][][]string) []string {
 
 			points = append(points, plist...)
 		}
-	}
 
-	fmt.Println(points)
+		// diagonal lines
+		if (x1 != x2 && y1 != y2) {
+			plist := getDiagonalPoints(x1, y1, x2, y2)
+			points = append(points, plist...)
+		}
+	}
 
 	return points
 }

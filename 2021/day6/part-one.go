@@ -8,7 +8,7 @@ import (
 	"strconv"
 )
 
-const NumDays = 80
+const NumDays = 256
 
 func parseInt64(s string) int64 {
 	x, err := strconv.ParseInt(s, 10, 64)
@@ -36,6 +36,8 @@ func main() {
 	}
 
 	for i := 0; i < NumDays; i++ {
+		fmt.Println(i)
+
 		for i := 0; i < len(fish); i++ {
 			if (fish[i] == 0) {
 				fish[i] = 7

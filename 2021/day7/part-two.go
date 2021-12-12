@@ -24,6 +24,7 @@ type Key struct {
 	count int
 }
 
+// this could be more efficient but my brain is kinda fried, so fuck it.
 func calcFuel(x int, y int) int {
 	m := 0
 	s := 0

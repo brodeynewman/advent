@@ -27,9 +27,13 @@ type Key struct {
 func deduceSpawnedFishRescursively(count int, daysLeft int, cache *map[Key]int) int {
 	ndl := daysLeft - (count + 1)
 
-	if ndl < 0 { return 1 }
+	// if we've reached the bottom of our recursion
+	// we know we need to add 1
+	if ndl <= 0 { return 1 }
 
 	if _, ok := (*cache)[Key{ndl, count}]; !ok {
+		// get all instances of fish spawned from the brand new fish (8 day lifespan) + the existing fish (6 day lifespan)
+		// from the current point in time.
 		v := deduceSpawnedFishRescursively(8, ndl, cache) + deduceSpawnedFishRescursively(6, ndl, cache)
 		(*cache)[Key{ndl, count}] = v
 	}
